@@ -1,7 +1,13 @@
 <script setup>
-import { defineEmits } from "vue";
+import useKeyDown from "@/composables/useKeyDown";
 
-defineEmits(["close"]);
+const emit = defineEmits(["close"]);
+useKeyDown([
+  {
+    key: "Escape",
+    fn: () => emit("close"),
+  },
+]);
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import axios from "axios";
-import useFormatDate from "@/utils/useFormatDate";
+import useFormatDate from "@/composables/useFormatDate";
 import MailView from "./MailView.vue";
 import ModalView from "./ModalView.vue";
 

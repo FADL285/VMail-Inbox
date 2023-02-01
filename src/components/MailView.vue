@@ -1,7 +1,6 @@
 <script setup>
-import { defineProps } from "vue";
 import { marked } from "marked";
-import useFormatDate from "@/utils/useFormatDate";
+import useFormatDate from "@/composables/useFormatDate";
 
 defineProps({
   email: {
