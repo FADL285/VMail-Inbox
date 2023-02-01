@@ -10,9 +10,10 @@
 button {
   font-size: 16px;
   padding: 8px;
-  border-radius: 3px;
+  border-radius: 2px;
   margin: 5px 10px 5px 0px;
   cursor: pointer;
+  border-color: #e2d7d7;
 }
 button:disabled {
   cursor: auto;

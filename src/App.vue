@@ -1,9 +1,16 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import useFormatDate from "./utils/useFormatDate";
 
 import { emails } from "/db.json";
 const mails = ref(emails);
+const sortedMails = computed(() =>
+  [...mails.value].sort((a, b) => new Date(b.sentAt) - new Date(a.sentAt))
+);
+
+const unArchivedMails = computed(() =>
+  sortedMails.value.filter((mail) => !mail.archived)
+);
 </script>
 
 <template>
@@ -12,7 +19,7 @@ const mails = ref(emails);
     <table class="mail-table">
       <tbody>
         <tr
-          v-for="mail in mails"
+          v-for="mail in unArchivedMails"
           :key="mail.id"
           :class="['clickable', mail.read ? 'read' : '']"
           @click="mail.read = true"
@@ -29,6 +36,7 @@ const mails = ref(emails);
             </p>
           </td>
           <td class="date">{{ useFormatDate(new Date(mail.sentAt)) }}</td>
+          <td><button @click="mail.archived = true">Archive</button></td>
         </tr>
       </tbody>
     </table>
