@@ -20,22 +20,22 @@ defineProps({
 const emit = defineEmits(["changeEmail"]);
 
 const toggleRead = () => {
-  emit("change-email", { toggleRead: true, save: true });
+  emit("changeEmail", { toggleRead: true, save: true });
 };
 const toggleArchive = () => {
-  emit("change-email", { toggleArchive: true, save: true, closeModal: true });
+  emit("changeEmail", { toggleArchive: true, save: true, closeModal: true });
 };
 const goNewer = () => {
-  emit("change-email", { changeIndex: -1 });
+  emit("changeEmail", { changeIndex: -1 });
 };
 const goOlder = () => {
-  emit("change-email", { changeIndex: 1 });
+  emit("changeEmail", { changeIndex: 1 });
 };
 const goNewerAndArchive = () => {
-  emit("change-email", { changeIndex: -1, toggleArchive: true, save: true });
+  emit("changeEmail", { changeIndex: -1, toggleArchive: true, save: true });
 };
 const goOlderAndArchive = () => {
-  emit("change-email", { changeIndex: 1, toggleArchive: true, save: true });
+  emit("changeEmail", { changeIndex: 1, toggleArchive: true, save: true });
 };
 
 useKeyDown([

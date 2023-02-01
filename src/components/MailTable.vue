@@ -2,14 +2,19 @@
 import { computed, ref } from "vue";
 import axios from "axios";
 import useFormatDate from "@/composables/useFormatDate";
+import useEmailSelection from "@/composables/useEmailSelection";
 import MailView from "./MailView.vue";
 import ModalView from "./ModalView.vue";
+import BulkActionsBar from "@/components/BulkActionsBar.vue";
 
 const emails = ref([]);
 emails.value = await axios
   .get(import.meta.env.VITE_API_URL + "/emails")
   .then((res) => res.data);
 const openedEmail = ref(null);
+
+const { emails: selectedEmails, toggle: toggleSelectedEmails } =
+  useEmailSelection();
 
 // Computed properties
 const sortedEmails = computed(() =>
@@ -70,6 +75,7 @@ const changeEmail = async ({
 </script>
 
 <template>
+  <BulkActionsBar :emails="unArchivedEmails" />
   <table class="mail-table">
     <tbody>
       <tr
@@ -79,7 +85,11 @@ const changeEmail = async ({
         @click="openEmail(email)"
       >
         <td>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            @click.stop="toggleSelectedEmails(email)"
+            :checked="selectedEmails.has(email)"
+          />
         </td>
         <td>
           {{ email.from }}
