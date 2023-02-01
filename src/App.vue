@@ -1,5 +1,11 @@
 <script setup>
+import { onErrorCaptured } from "vue";
 import MailTable from "@/components/MailTable.vue";
+
+onErrorCaptured((err) => {
+  console.log("Error");
+  console.log(err);
+});
 </script>
 
 <template>
@@ -12,9 +18,6 @@ import MailTable from "@/components/MailTable.vue";
       </template>
       <template #fallback>
         <div>Loading...</div>
-      </template>
-      <template #error>
-        <div>Error :(</div>
       </template>
     </Suspense>
   </main>

@@ -25,15 +25,24 @@
       "body": "First of all, lets congratulate Kia King Ishii on joining the Vue.js core team! 🎉 He has been doing an incredible job building vuex-orm and will now focus on working on the next versions of Vuex.\n\nSpeaking of which – Vuex v4.0.0-alpha.1 has just been released! This is the version of Vuex that will work with Vue 3.0 but keep the familiar API you know from the current version.",
       "sentAt": "2020-03-18T18:25:43.511Z",
       "archived": false,
-      "read": true
+      "read": false
     },
     {
       "id": 4,
-      "from": "anthony@vuejsdevelopers.com",
-      "subject": "'Vue 3 Release Roadmap' + 6 more must-read articles from this week",
-      "body": "Newsletter Issue #161",
+      "from": "mohamedfadl@ieee.org",
+      "subject": "Must-read Vue.js articles of the week",
+      "body": "Hello Team,\n\nHope you are doing well! I've compiled a list of must-read articles about Vue.js from this week. These articles cover a wide range of topics and provide valuable insights into the latest trends and developments in the Vue.js community.\n\nHere are the top 6 articles that I highly recommend:\n\n1. [5 Common Mistakes to Avoid When Using Vue.js](https://www.sitepoint.com/common-mistakes-vue-js/)\n2. [Vue.js 3.0: What's New and What's Changed](https://dev.to/vuejs/vue-js-3-0-whats-new-and-whats-changed-2ljn)\n3. [How to Build a CRUD Application with Vue.js and Firebase](https://auth0.com/blog/how-to-build-a-crud-application-with-vue-js-and-firebase/)\n4. [Vue.js Animations: A Complete Guide](https://alligator.io/vuejs/vue-js-animations/)\n5. [Vue.js Directives: A Beginner's Guide](https://www.digitalocean.com/community/tutorials/vue-js-directives-a-beginners-guide)\n6. [Vue.js and GraphQL: A Perfect Match](https://blog.apollographql.com/vue-js-and-graphql-a-perfect-match-b03c3dcf6d9a)\n\nI hope you find these articles helpful and informative. If you have any questions or need further information, please don't hesitate to reach out.\n\nBest regards,\n\nMohamed Fadl\n",
       "sentAt": "2020-03-24T18:25:43.511Z",
-      "archived": true,
+      "archived": false,
+      "read": false
+    },
+    {
+      "id": 5,
+      "from": "fadl285@outlook.com",
+      "subject": "Must-read articles on the latest technical topic",
+      "body": "Hello Team,\n\nHope you are doing well! I've compiled a list of must-read articles about the latest technical topic. These articles cover a wide range of topics and provide valuable insights into the latest trends and developments in the field.\n\nHere are the top 6 articles that I highly recommend:\n\n1. [The Future of [Technical Topic]: Insights and Predictions](https://www.sitepoint.com/future-of-technical-topic/)\n2. [Top 10 Trends in [Technical Topic] for 2023](https://dev.to/top-trends-in-technical-topic-for-2023-2ljn)\n3. [How to Build Advanced Applications with [Technical Topic]](https://auth0.com/blog/how-to-build-advanced-applications-with-technical-topic/)\n4. [The Ultimate Guide to [Technical Topic] Development](https://alligator.io/ultimate-guide-to-technical-topic-development/)\n5. [[Technical Topic] for Beginners: A Step-by-Step Guide](https://www.digitalocean.com/community/tutorials/technical-topic-for-beginners)\n6. [The Power of [Technical Topic] and Machine Learning](https://blog.apollographql.com/power-of-technical-topic-and-machine-learning)\n\nI hope you find these articles helpful and informative. If you have any questions or need further information, please don't hesitate to reach out.\n\nBest regards,\n\nMohamed Fadl",
+      "sentAt": "2022-05-24T14:25:43.511Z",
+      "archived": false,
       "read": true
     }
   ]

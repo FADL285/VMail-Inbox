@@ -48,6 +48,12 @@ input[type="checkbox"]:checked {
 .mb-0 {
   margin-bottom: 0;
 }
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
 /* Modal */
 .modal,
 .overlay {
