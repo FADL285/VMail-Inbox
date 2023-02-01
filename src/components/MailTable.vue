@@ -7,40 +7,55 @@ import MailView from "./MailView.vue";
 import ModalView from "./ModalView.vue";
 import BulkActionsBar from "@/components/BulkActionsBar.vue";
 
+// Constants
+const INBOX_SCREEN = "inbox";
+const ARCHIVE_SCREEN = "archive";
+
+const currentScreen = ref(INBOX_SCREEN);
 const emails = ref([]);
 emails.value = await axios
   .get(import.meta.env.VITE_API_URL + "/emails")
   .then((res) => res.data);
 const openedEmail = ref(null);
 
-const { emails: selectedEmails, toggle: toggleSelectedEmails } =
-  useEmailSelection();
+const {
+  emails: selectedEmails,
+  toggle: toggleSelectedEmails,
+  clear: clearSelectedEmails,
+} = useEmailSelection();
 
 // Computed properties
 const sortedEmails = computed(() =>
   [...emails.value].sort((a, b) => new Date(b.sentAt) - new Date(a.sentAt))
 );
-const unArchivedEmails = computed(() =>
-  sortedEmails.value.filter((email) => !email.archived)
+const filteredEmails = computed(() =>
+  sortedEmails.value.filter((email) =>
+    currentScreen.value === INBOX_SCREEN ? !email.archived : email.archived
+  )
 );
 const isLastEmail = computed(() => {
-  const index = unArchivedEmails.value.findIndex(
+  const index = filteredEmails.value.findIndex(
     (e) => e.id === openedEmail.value?.id
   );
-  return index === unArchivedEmails.value.length - 1;
+  return index === filteredEmails.value.length - 1;
 });
 const isFirstEmail = computed(() => {
-  const index = unArchivedEmails.value.findIndex(
+  const index = filteredEmails.value.findIndex(
     (e) => e.id === openedEmail.value?.id
   );
   return index === 0;
 });
 
 // Methods
+const changeScreen = (screen) => {
+  openedEmail.value = null;
+  clearSelectedEmails();
+  currentScreen.value = screen;
+};
 const updateEmail = async (email) => {
   await axios.put(`${import.meta.env.VITE_API_URL}/emails/${email.id}`, email);
 };
-const markAsArchived = async (email) => {
+const toggleArchive = async (email) => {
   email.archived = !email.archived;
   await updateEmail(email);
 };
@@ -65,21 +80,38 @@ const changeEmail = async ({
   if (changeIndex) {
     if (isFirstEmail.value && changeIndex === -1) return;
     if (isLastEmail.value && changeIndex === 1) return;
-    const index = unArchivedEmails.value.findIndex(
+    const index = filteredEmails.value.findIndex(
       (e) => e.id === openedEmail.value.id
     );
-    openedEmail.value = unArchivedEmails.value.at(index + changeIndex);
+    openedEmail.value = filteredEmails.value.at(index + changeIndex);
   }
   if (closeModal) openedEmail.value = null;
 };
 </script>
 
 <template>
-  <BulkActionsBar :emails="unArchivedEmails" />
-  <table class="mail-table">
+  <div>
+    <button
+      @click="changeScreen(INBOX_SCREEN)"
+      :disabled="currentScreen === INBOX_SCREEN"
+    >
+      Inbox
+    </button>
+    <button
+      @click="changeScreen(ARCHIVE_SCREEN)"
+      :disabled="currentScreen === ARCHIVE_SCREEN"
+    >
+      Archive
+    </button>
+  </div>
+  <BulkActionsBar
+    :emails="filteredEmails"
+    :isInbox="currentScreen === INBOX_SCREEN"
+  />
+  <table v-if="filteredEmails.length" class="mail-table">
     <tbody>
       <tr
-        v-for="email in unArchivedEmails"
+        v-for="email in filteredEmails"
         :key="email.id"
         :class="['clickable', email.read ? 'read' : '']"
         @click="openEmail(email)"
@@ -100,10 +132,15 @@ const changeEmail = async ({
           </p>
         </td>
         <td class="date">{{ useFormatDate(new Date(email.sentAt)) }}</td>
-        <td><button @click.stop="markAsArchived(email)">Archive</button></td>
+        <td>
+          <button @click.stop="toggleArchive(email)">
+            {{ currentScreen === INBOX_SCREEN ? "Archive" : "Move to Inbox" }}
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
+  <p v-else class="text-xl">No emails to show</p>
 
   <ModalView v-if="openedEmail" @close="openedEmail = null">
     <MailView

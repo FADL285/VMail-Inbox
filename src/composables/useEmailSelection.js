@@ -29,6 +29,8 @@ export default function useEmailSelection() {
   const markAsUnread = () => forSelected((email) => (email.read = false));
   const archive = () =>
     forSelected((email) => (email.archived = true)).then(() => clear());
+  const unArchive = () =>
+    forSelected((email) => (email.archived = false)).then(() => clear());
 
   return {
     emails,
@@ -38,5 +40,6 @@ export default function useEmailSelection() {
     markAsRead,
     markAsUnread,
     archive,
+    unArchive,
   };
 }

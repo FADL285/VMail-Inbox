@@ -14,6 +14,9 @@ button {
   margin: 5px 10px 5px 0;
   cursor: pointer;
   border-color: #e2d7d7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 button:disabled {
   cursor: auto;
@@ -134,4 +137,7 @@ input[type="checkbox"]:disabled {
 .bulk-action-bar .checkbox {
   margin-right: 6px;
   margin-left: 3px;
+}
+.text-xl {
+  font-size: 2.25rem;
 }

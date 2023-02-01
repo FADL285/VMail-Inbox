@@ -9,11 +9,16 @@ const {
   markAsRead,
   markAsUnread,
   archive,
+  unArchive,
 } = useEmailSelection();
 
 const props = defineProps({
   emails: {
     type: Array,
+    required: true,
+  },
+  isInbox: {
+    type: Boolean,
     required: true,
   },
 });
@@ -56,7 +61,12 @@ const bulkSelect = () => {
       <button @click="markAsUnread" :disabled="allIsUnread">
         Mark as Unread
       </button>
-      <button @click="archive" :disabled="!selectedEmails.size">Archive</button>
+      <button
+        @click="isInbox ? archive() : unArchive()"
+        :disabled="!selectedEmails.size"
+      >
+        {{ isInbox ? "Archive" : "Move to Inbox" }}
+      </button>
     </span>
   </div>
 </template>
