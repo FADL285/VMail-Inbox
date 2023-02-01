@@ -1,53 +1,38 @@
 <script setup>
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
+import { ref } from "vue";
+import useFormatDate from "./utils/useFormatDate";
+
+import { emails } from "/db.json";
+const mails = ref(emails);
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <h1>VMail Inbox</h1>
+    <table class="mail-table">
+      <tbody>
+        <tr
+          v-for="mail in mails"
+          :key="mail.id"
+          :class="['clickable', mail.read ? 'read' : '']"
+          @click="mail.read = true"
+        >
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>
+            {{ mail.from }}
+          </td>
+          <td>
+            <p>
+              <strong>{{ mail.subject }}</strong> - {{ mail.body }}
+            </p>
+          </td>
+          <td class="date">{{ useFormatDate(new Date(mail.sentAt)) }}</td>
+        </tr>
+      </tbody>
+    </table>
   </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<style scoped></style>
