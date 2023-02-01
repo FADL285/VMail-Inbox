@@ -11,7 +11,7 @@ button {
   font-size: 16px;
   padding: 8px;
   border-radius: 2px;
-  margin: 5px 10px 5px 0px;
+  margin: 5px 10px 5px 0;
   cursor: pointer;
   border-color: #e2d7d7;
 }
@@ -39,11 +39,18 @@ input[type="checkbox"] {
   vertical-align: middle;
   padding: 10px;
 }
+input[type="checkbox"]:hover {
+  background: rgba(221, 230, 229, 0.56);
+}
 input[type="checkbox"].partial-check {
   background: #abc;
 }
 input[type="checkbox"]:checked {
   background: #679;
+}
+input[type="checkbox"]:disabled {
+  background: rgba(204, 205, 211, 0.57);
+  cursor: not-allowed;
 }
 .mb-0 {
   margin-bottom: 0;

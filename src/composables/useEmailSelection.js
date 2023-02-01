@@ -1,4 +1,5 @@
 import { reactive } from "vue";
+import axios from "axios";
 
 const emails = reactive(new Set());
 export default function useEmailSelection() {
@@ -15,10 +16,27 @@ export default function useEmailSelection() {
     });
   };
 
+  const forSelected = async (callback) => {
+    for (const email of emails) {
+      callback(email);
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/emails/${email.id}`,
+        email
+      );
+    }
+  };
+  const markAsRead = () => forSelected((email) => (email.read = true));
+  const markAsUnread = () => forSelected((email) => (email.read = false));
+  const archive = () =>
+    forSelected((email) => (email.archived = true)).then(() => clear());
+
   return {
     emails,
     toggle,
     clear,
     addMultiple,
+    markAsRead,
+    markAsUnread,
+    archive,
   };
 }
